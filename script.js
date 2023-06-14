@@ -1,3 +1,32 @@
+//the following code displays the current day
+let today = dayjs();
+$('#currentDay').text(today.format('MMM D, YYYY'));
+
+//finds and logs the current hour on a 24 hour clock
+let currentHour = today.hour();
+console.log("The Current hour is: " + currentHour)
+
+//compares the current hour with the ID in the HTML
+for (let hour = 9; hour <= 17; hour++) {
+  let timeBlockId = `hour-${hour}`;
+  let hourFromId = parseInt(timeBlockId.split("-")[1]);
+  console.log("the hour obtained by the ID is " + hourFromId)
+
+  let timeBlockElement = document.getElementById(timeBlockId);
+
+  //based on the HTML ID is color codes the DIV's to
+  //corrispond to past present or future
+  if (hourFromId < currentHour) {
+    timeBlockElement.classList.remove("time-block", "present", "future");
+    timeBlockElement.classList.add("past");
+  } else if (hourFromId === currentHour) {
+    timeBlockElement.classList.remove("time-block", "past", "future");
+    timeBlockElement.classList.add("present");
+  } else {
+    timeBlockElement.classList.remove("time-block", "past", "present");
+    timeBlockElement.classList.add("future");
+  }
+}
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
